@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix = './')
 
 # events. bot detects something happened. does a thing in response
 @bot.event
-async def on_ready(): # bit is ready for action
+async def on_ready(): # bot is ready for action
     print('Bot is ready.')
 
 @bot.event
@@ -38,16 +38,34 @@ async def _8ball(ctx, *, question): # * is wildcard used to assume connect text 
 @bot.command()
 async def clear(ctx, amount=1): #=1 is the default value if amount not specified
     await ctx.channel.purge(limit=amount)
-    await ctx.send(f'last {amount} messages deleted')
+    await ctx.send(f'Last {amount} messages deleted.')
 
 # kick/ban command
 @bot.command()
-async def kick(ctx, user : discord.Member, *, reason='not logged'): 
-    await user.kick(reason=reason)
+async def kick(ctx, member : discord.Member, *, reason='not logged'): 
+    await member.kick(reason=reason)
+    await ctx.send(f'Banned {member.mention} for {reason}.')
 
 @bot.command()
-async def ban(ctx, user : discord.Member, *, reason='not logged'): 
-    await user.ban(reason=reason)
+async def ban(ctx, member : discord.Member, *, reason='not logged'): 
+    await member.ban(reason=reason)
+    await ctx.send(f'Banned {member.mention} for {reason}.')
+    
 
-# turn on the bots
-bot.run('') # token here
+# unban
+@bot.command()
+async def unban(ctx, *, member):
+    banned_members = await ctx.guild.bans() #Get list of banned members, tuple
+    member_name, member_discrim = member.split('#') #splits membername into name and discriminator membername#1234
+
+    for ban_entry in banned_members:
+        user = ban_entry.user
+
+        if (user.name, user.discriminator) == (member_name, member_discrim):#check if user matches desired unban.
+            await ctx.guild.unban(user)
+            await ctx.send(f'Unbanned {user.mention}.')
+            return
+
+
+# turn on the bot
+bot.run('') # token here ''
