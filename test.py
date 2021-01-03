@@ -5,14 +5,16 @@
 import discord # discord.py
 import random # for rng
 import os
-from discord.ext import commands 
+from discord.ext import commands, tasks
 
 # initialize bot
-bot = commands.Bot(command_prefix = './')
+botprefix = './'
+bot = commands.Bot(command_prefix = botprefix)
 
 # events. bot detects something happened. does a thing in response
 @bot.event
 async def on_ready(): # bot is ready for action
+    await bot.change_presence(status = discord.Status.idle, activity = discord.Game(f'{botprefix}help for help'))# Bot Status displayed on Discord
     print('Bot is ready.')
 
 @bot.event
@@ -78,7 +80,7 @@ async def unload(ctx, extension):
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}') #[:-3] removes last 3 chars from filename, the .py
+        bot.load_extension(f'cogs.{filename[:-3]}') #[:-3] removes last 3 chars from filename, the .py
 
 # turn on the bot
 bot.run('') # token here ''
