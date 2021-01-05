@@ -22,7 +22,6 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send(f'Command not found. Check {botprefix}help for more info.')
 
-
 # Cogs/extensions
 @bot.command()
 async def load(ctx, extension):
@@ -38,4 +37,4 @@ for filename in os.listdir('./cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}') #[:-3] removes last 3 chars from filename, the .py
 
 # turn on the bot
-bot.run('Nzk2MTEwNzk3MDcxNzEyMjg2.X_TJ9Q.tPqG2ky1OyaSz-b9gJnmWMHChIo')
+bot.run('')
