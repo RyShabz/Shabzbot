@@ -5,6 +5,9 @@
 import discord # discord.py
 import os
 from discord.ext import commands, tasks
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # initialize bot
 botprefix = './'
@@ -37,4 +40,4 @@ for filename in os.listdir('./cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}') #[:-3] removes last 3 chars from filename, the .py
 
 # turn on the bot
-bot.run('')
+bot.run(os.getenv('DISCORD_TOKEN'))
