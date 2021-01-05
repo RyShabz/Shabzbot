@@ -6,12 +6,11 @@ class Tasks(commands.Cog):
     def __init__(self, bot): #research __init__
         self.bot = bot
 
-status = cycle(['status 1', 'status 2'])
+status = cycle(['./help for help', 'hank says hank'])
 
-@commands.Cog.listener() #required for some reason
-async def on_ready(self): #self must be passed to all functions in class
+@commands.Cog.listener()
+async def on_ready(self):
     change_status.start()
-    print('task cog loaded')
 
 @tasks.loop(seconds = 10)
 async def change_status(self, bot):

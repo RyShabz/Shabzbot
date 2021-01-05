@@ -1,1 +1,4 @@
+# Ignore files
 *.env
+*.test
+cogs/example.py

@@ -5,8 +5,6 @@ class Admin(commands.Cog):
     def __init__(self, bot): #research __init__
         self.bot = bot
 
-    @commands.Cog.listener()
-
     # Pings bot and displays latency
     @commands.command()
     async def ping(self, ctx): 
@@ -16,7 +14,7 @@ class Admin(commands.Cog):
     @commands.command()
     async def clear(self, ctx, amount = 1): #=1 is the default value if amount not specified
         await ctx.channel.purge(limit = amount)
-        await ctx.send(f'Last {amount} messages deleted.')
+        await ctx.send(f'Last {amount} message(s) deleted.')
 
     # Kick Command
     @commands.command()

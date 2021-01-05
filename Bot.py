@@ -16,6 +16,13 @@ async def on_ready(): # bot is ready for action
     await bot.change_presence(status = discord.Status.idle, activity = discord.Game(f'{botprefix}help for help'))# Bot Status displayed on Discord
     print('Bot is ready.')
 
+# Error handling
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send(f'Command not found. Check {botprefix}help for more info.')
+
+
 # Cogs/extensions
 @bot.command()
 async def load(ctx, extension):
@@ -31,4 +38,4 @@ for filename in os.listdir('./cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}') #[:-3] removes last 3 chars from filename, the .py
 
 # turn on the bot
-bot.run('') # token here as string
+bot.run('Nzk2MTEwNzk3MDcxNzEyMjg2.X_TJ9Q.tPqG2ky1OyaSz-b9gJnmWMHChIo')
