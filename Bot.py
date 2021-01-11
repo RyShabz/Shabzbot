@@ -1,12 +1,16 @@
 # messing around with discord.py
 # https://github.com/Rapptz/discord.py
 # https://discordpy.readthedocs.io/en/latest/index.html
+#
+# https://github.com/ryshabz/shabzbot
+#
 
 import discord # discord.py
 import os
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
+# Bring in .env
 load_dotenv()
 
 # initialize bot
